@@ -6,8 +6,11 @@ Using a single script the user can choose whether to do a bulk merge from a fold
 
 This project is very easy to use and provides step-by-step instructions to follow through to achieve the desired result. 
 
+
 # sraper2.py : A HackerNews (news.ycombinator.com) scraper
 
-A web scraping tool to get your favorite articles allowing you to select how many pages to scrape and filter by points count. 
+A web scraping tool to get your favorite articles allowing you to select how many pages to scrape and filter by points count. Results are displayed on a Pandas dataframe for a better, more clear read. 
+
+Improvements: Write the results into a .csv file.
 
 
