@@ -4,6 +4,9 @@ import pandas as pd
 import time 
 
 def custom_feed_single():
+    ''' This function runs a single scrape just for the homepage, collecting items in a dictionary 
+    and storing them in a list, extracting the title, link and votes information.
+    '''
     custom_list = []
     res = requests.get(f'https://news.ycombinator.com/')
     soup = BeautifulSoup(res.text, 'html.parser')
@@ -17,6 +20,10 @@ def custom_feed_single():
     return sorted_pd(custom_list)
 
 def custom_feed_various(pages):
+    ''' Multi page scraper which scans the number of pages indicated by the user at the beginning 
+    of script execution. Collects items in a dictionary and stores them in a list, 
+    extracting the title, link and votes information.
+    '''
     custom_list = []
     for i in range(pages):
         res_pages = requests.get(f'https://news.ycombinator.com/news?p={i+1}')
@@ -33,6 +40,10 @@ def custom_feed_various(pages):
     return sorted_pd(custom_list)
 
 def sorted_pd(list):
+    ''' Grabs the article list created in the single or multi page scraper and converts it into a 
+    Pandas dataframe for easy reading and manipulation. The user inputs the desired
+    points score for further filtering.
+    '''
     df = pd.DataFrame(list)
     df = df.sort_values(['Votes'], ascending=False)
     p = int(input('Please enter your points filter: '))
@@ -44,6 +55,9 @@ def sorted_pd(list):
     return df[df['Votes']>p]
 
 def run_scrape():
+    '''Script execution which promps the user to select how many pages to scrape and whether to display
+    full or just top 5 results.
+    '''
     n = int(input('How many pages do you wish to scrape? '))
     q = input('For complete results, type "all". For just the top 5, type "head": ')
     if n >= 2:
